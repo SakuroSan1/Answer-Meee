@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Answer meee | Official YouTube Channel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF0000;
+            --primary-dark: #CC0000;
+            --dark: #212121;
+            --light: #f9f9f9;
+            --gray: #e0e0e0;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .channel-profile-container {
+            position: relative;
+        }
+
+        .channel-profile {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .logo:hover .channel-profile {
+            transform: scale(1.05);
+        }
+
+        .verified-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #1DA1F2;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+        }
+
+        .logo-text h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.3rem;
+        }
+
+        .logo-text p {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        .channel-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .channel-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .subscribe-btn {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-size: 1rem;
+        }
+
+        .subscribe-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .subscribe-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: var(--primary);
+        }
+
+        .video-count {
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .thumbnail-container {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            overflow: hidden;
+        }
+
+        .thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .video-card:hover .thumbnail {
+            transform: scale(1.08);
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .play-icon i {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-left: 5px;
+        }
+
+        .video-card:hover .play-icon {
+            opacity: 1;
+        }
+
+        .duration-badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+
+        .video-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1.2rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .video-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Loading State */
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .spinner {
+            border: 5px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 5px solid var(--primary);
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            color: #666;
+            text-align: center;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Error State */
+        .error-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .error-message {
+            background: rgba(255, 0, 0, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 4px;
+            max-width: 600px;
+        }
+
+        .error-message h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .retry-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .retry-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.8rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-column p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .footer-link:hover {
+            opacity: 1;
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .footer-link i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .channel-profile {
+                width: 100px;
+                height: 100px;
+            }
+
+            .logo-text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .channel-stats {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-content, .container {
+                padding: 0 1.5rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="channel-profile-container">
+                    <img src="" alt="Channel Profile" class="channel-profile" id="channel-profile">
+                    <div class="verified-badge" id="verified-badge" style="display: none;">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                <div class="logo-text">
+                    <h1 id="channel-title">Answer meee</h1>
+                    <p id="channel-description">Loading channel information...</p>
+                    <div class="channel-stats">
+                        <div class="channel-stat" id="subscriber-count">
+                            <i class="fas fa-users"></i>
+                            <span>Loading...</span>
+                        </div>
+                        <div class="channel-stat" id="video-count-stat">
+                            <i class="fas fa-video"></i>
+                            <span>Loading...</span>
+                        </div>
+                        <div class="channel-stat" id="view-count">
+                            <i class="fas fa-eye"></i>
+                            <span>Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="subscribe-btn" id="subscribe-button">
+                <i class="fab fa-youtube"></i> Subscribe
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Latest Videos</h2>
+            <span class="video-count" id="video-count-display">Loading...</span>
+        </div>
+
+        <div id="content-container">
+            <div class="loading-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p class="loading-text">Loading your YouTube content...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About <span id="footer-channel-name">Answer meee</span></h3>
+                <p id="footer-channel-description">Loading channel description...</p>
+                <div class="social-links">
+                    <a href="#" id="youtube-social"><i class="fab fa-youtube"></i></a>
+                    <a href="#" id="instagram-social"><i class="fab fa-instagram"></i></a>
+                    <a href="#" id="twitter-social"><i class="fab fa-twitter"></i></a>
+                    <a href="#" id="facebook-social"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <div class="footer-links">
+                    <a href="https://www.youtube.com/@AnswerMeee9070" class="footer-link" target="_blank">
+                        <i class="fas fa-home"></i> Channel Home
+                    </a>
+                    <a href="https://www.youtube.com/@AnswerMeee9070/videos" class="footer-link" target="_blank">
+                        <i class="fas fa-film"></i> All Videos
+                    </a>
+                    <a href="#" class="footer-link" id="about-link">
+                        <i class="fas fa-info-circle"></i> About
+                    </a>
+                    <a href="#" class="footer-link" id="contact-link">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Channel Details</h3>
+                <p><i class="fas fa-calendar-alt"></i> Joined: <span id="channel-join-date">Loading...</span></p>
+                <p><i class="fas fa-map-marker-alt"></i> Location: <span id="channel-location">Loading...</span></p>
+                <p><i class="fas fa-link"></i> Website: <a href="#" id="channel-website-link" style="color: white; text-decoration: none;">Loading...</a></p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; <span id="current-year"></span> <span id="copyright-channel-name">Answer meee</span>. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Configuration
+        const API_KEY = 'AIzaSyDvZyPqBzuNg6_8JLEWD3BVmWq71vheWMo'; // Your provided API key
+        const CHANNEL_NAME = 'AnswerMeee9070'; // Your YouTube channel handle
+        
+        // DOM Elements
+        const contentContainer = document.getElementById('content-container');
+        const channelProfile = document.getElementById('channel-profile');
+        const channelTitle = document.getElementById('channel-title');
+        const channelDescription = document.getElementById('channel-description');
+        const verifiedBadge = document.getElementById('verified-badge');
+        const subscriberCount = document.getElementById('subscriber-count').querySelector('span');
+        const videoCountStat = document.getElementById('video-count-stat').querySelector('span');
+        const viewCount = document.getElementById('view-count').querySelector('span');
+        const subscribeButton = document.getElementById('subscribe-button');
+        const videoCountDisplay = document.getElementById('video-count-display');
+        const footerChannelName = document.getElementById('footer-channel-name');
+        const footerChannelDescription = document.getElementById('footer-channel-description');
+        const copyrightChannelName = document.getElementById('copyright-channel-name');
+        const currentYear = document.getElementById('current-year');
+        const channelJoinDate = document.getElementById('channel-join-date');
+        const channelLocation = document.getElementById('channel-location');
+        const channelWebsiteLink = document.getElementById('channel-website-link');
+        
+        // Set current year
+        currentYear.textContent = new Date().getFullYear();
+
+        // Format numbers (1000 -> 1K)
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(1) + 'M';
+            }
+            if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num.toString();
+        }
+
+        // Format date (ISO string -> "Month Year")
+        function formatJoinDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        }
+
+        // Format video duration (PT1H23M45S -> 1:23:45)
+        function formatDuration(duration) {
+            const matches = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+            const hours = (matches[1] ? parseInt(matches[1]) : 0);
+            const minutes = (matches[2] ? parseInt(matches[2]) : 0);
+            const seconds = (matches[3] ? parseInt(matches[3]) : 0);
+            
+            if (hours > 0) {
+                return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Calculate time since upload
+        function timeSinceUpload(publishedAt) {
+            const date = new Date(publishedAt);
+            const now = new Date();
+            const diffInSeconds = Math.floor((now - date) / 1000);
+            
+            if (diffInSeconds < 60) return `${diffInSeconds} seconds ago`;
+            if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+            if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+            if (diffInSeconds < 2592000) return `${Math.floor(diffInSeconds / 86400)} days ago`;
+            if (diffInSeconds < 31536000) return `${Math.floor(diffInSeconds / 2592000)} months ago`;
+            return `${Math.floor(diffInSeconds / 31536000)} years ago`;
+        }
+
+        // Fetch channel data
+        async function fetchChannelData() {
+            try {
+                contentContainer.innerHTML = `
+                    <div class="loading-container">
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            <p class="loading-text">Loading your YouTube content...</p>
+                        </div>
+                    </div>
+                `;
+                
+                // First fetch to get channel ID from handle
+                const channelResponse = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${CHANNEL_NAME}&key=${API_KEY}`);
+                const channelData = await channelResponse.json();
+                
+                if (!channelData.items || channelData.items.length === 0) {
+                    throw new Error('Channel not found');
+                }
+                
+                const channelId = channelData.items[0].id.channelId;
+                
+                // Fetch channel details
+                const detailsResponse = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&id=${channelId}&key=${API_KEY}`);
+                const detailsData = await detailsResponse.json();
+                
+                if (!detailsData.items || detailsData.items.length === 0) {
+                    throw new Error('Channel details not found');
+                }
+                
+                const channel = detailsData.items[0];
+                const snippet = channel.snippet;
+                const stats = channel.statistics;
+                const branding = channel.brandingSettings;
+                
+                // Update channel info
+                channelTitle.textContent = snippet.title;
+                channelDescription.textContent = snippet.description || 'Official YouTube channel';
+                footerChannelName.textContent = snippet.title;
+                copyrightChannelName.textContent = snippet.title;
+                channelProfile.src = snippet.thumbnails.high.url;
+                
+                // Show verified badge if channel is verified
+                if (branding.channel && branding.channel.isVerified) {
+                    verifiedBadge.style.display = 'flex';
+                }
+                
+                // Update stats
+                subscriberCount.textContent = formatNumber(stats.subscriberCount) + ' subscribers';
+                videoCountStat.textContent = formatNumber(stats.videoCount) + ' videos';
+                viewCount.textContent = formatNumber(stats.viewCount) + ' views';
+                
+                // Update subscribe button
+                subscribeButton.innerHTML = `<i class="fab fa-youtube"></i> Subscribe (${formatNumber(stats.subscriberCount)})`;
+                subscribeButton.onclick = () => window.open(`https://www.youtube.com/channel/${channelId}?sub_confirmation=1`, '_blank');
+                
+                // Update footer info
+                footerChannelDescription.textContent = snippet.description || 'Premium content created to educate and entertain';
+                channelJoinDate.textContent = formatJoinDate(snippet.publishedAt);
+                channelLocation.textContent = snippet.country || 'Not specified';
+                
+                if (branding.channel && branding.channel.externalUrl) {
+                    channelWebsiteLink.textContent = branding.channel.externalUrl;
+                    channelWebsiteLink.href = branding.channel.externalUrl;
+                }
+                
+                // Update social links if available
+                if (branding.channel && branding.channel.socialLinks) {
+                    branding.channel.socialLinks.forEach(link => {
+                        if (link.includes('youtube.com')) {
+                            document.getElementById('youtube-social').href = link;
+                        } else if (link.includes('instagram.com')) {
+                            document.getElementById('instagram-social').href = link;
+                        } else if (link.includes('twitter.com')) {
+                            document.getElementById('twitter-social').href = link;
+                        } else if (link.includes('facebook.com')) {
+                            document.getElementById('facebook-social').href = link;
+                        }
+                    });
+                }
+                
+                // Fetch channel videos
+                await fetchChannelVideos(channelId);
+                
+            } catch (error) {
+                console.error('Error loading channel data:', error);
+                showError('Failed to load channel data. Please try again later or check your API key.');
+            }
+        }
+        
+        // Fetch channel videos
+        async function fetchChannelVideos(channelId) {
+            try {
+                // First get the uploads playlist ID
+                const channelResponse = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&key=${API_KEY}`);
+                const channelData = await channelResponse.json();
+                
+                if (!channelData.items || channelData.items.length === 0) {
+                    throw new Error('Channel not found');
+                }
+                
+                const uploadsPlaylistId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
+                
+                // Fetch videos from the uploads playlist
+                let videos = [];
+                let nextPageToken = '';
+                
+                do {
+                    const videosResponse = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${uploadsPlaylistId}&pageToken=${nextPageToken}&key=${API_KEY}`);
+                    const videosData = await videosResponse.json();
+                    
+                    if (videosData.items && videosData.items.length > 0) {
+                        videos = videos.concat(videosData.items);
+                    }
+                    
+                    nextPageToken = videosData.nextPageToken || '';
+                } while (nextPageToken);
+                
+                if (videos.length === 0) {
+                    throw new Error('No videos found');
+                }
+                
+                // Get video details (for duration)
+                const videoIds = videos.map(video => video.snippet.resourceId.videoId).join(',');
+                const detailsResponse = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics&id=${videoIds}&key=${API_KEY}`);
+                const detailsData = await detailsResponse.json();
+                
+                const videoDetails = {};
+                if (detailsData.items && detailsData.items.length > 0) {
+                    detailsData.items.forEach(video => {
+                        videoDetails[video.id] = {
+                            duration: video.contentDetails.duration,
+                            viewCount: video.statistics.viewCount
+                        };
+                    });
+                }
+                
+                // Display videos
+                displayVideos(videos, videoDetails);
+                
+            } catch (error) {
+                console.error('Error loading videos:', error);
+                showError('Failed to load videos. Please try again later.');
+            }
+        }
+        
+        // Display videos
+        function displayVideos(videos, videoDetails) {
+            // Update video count
+            videoCountDisplay.textContent = `${videos.length} videos`;
+            
+            // Create video grid
+            let videoGridHTML = '<div class="video-grid">';
+            
+            videos.forEach(video => {
+                const videoId = video.snippet.resourceId.videoId;
+                const title = video.snippet.title;
+                const thumbnail = video.snippet.thumbnails.medium ? video.snippet.thumbnails.medium.url : `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+                const publishedAt = timeSinceUpload(video.snippet.publishedAt);
+                const duration = videoDetails[videoId] ? formatDuration(videoDetails[videoId].duration) : '';
+                const views = videoDetails[videoId] ? formatNumber(videoDetails[videoId].viewCount) + ' views' : '';
+                
+                videoGridHTML += `
+                    <a href="https://youtu.be/${videoId}" class="video-card" target="_blank">
+                        <div class="thumbnail-container">
+                            <img src="${thumbnail}" alt="${title}" class="thumbnail" loading="lazy">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            ${duration ? `<span class="duration-badge">${duration}</span>` : ''}
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">${title}</h3>
+                            <div class="video-meta">
+                                ${views ? `<span><i class="fas fa-eye"></i> ${views}</span>` : ''}
+                                <span><i class="far fa-calendar-alt"></i> ${publishedAt}</span>
+                            </div>
+                        </div>
+                    </a>
+                `;
+            });
+            
+            videoGridHTML += '</div>';
+            
+            contentContainer.innerHTML = videoGridHTML;
+        }
+        
+        // Show error message
+        function showError(message) {
+            contentContainer.innerHTML = `
+                <div class="error-container">
+                    <div class="error-message">
+                        <h3>Error Loading Content</h3>
+                        <p>${message}</p>
+                        <button class="retry-btn" onclick="fetchChannelData()">Try Again</button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', fetchChannelData);
+    </script>
+</body>
+</html>
